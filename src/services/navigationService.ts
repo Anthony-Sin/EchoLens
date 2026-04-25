@@ -28,7 +28,7 @@ export class NavigationService {
     return true;
   }
 
-  startDemoNavigation(speedMultiplier: number, onLocationUpdate: (coord: {latitude: number, longitude: number}) => void, isRestart = false) {
+  startDemoNavigation(speedMultiplier: number, onLocationUpdate: (coord: {latitude: number, longitude: number}) => void, isRestart = false, onEnd?: () => void) {
     console.log(`Started demo navigation at ${speedMultiplier}x speed`);
 
     if (!isRestart) {
@@ -40,7 +40,7 @@ export class NavigationService {
 
     this.demoInterval = setInterval(() => {
       if (this.currentStepIndex >= USF_MUMA_ROUTE.length) {
-        this.stopNavigation();
+        this.stopNavigation(onEnd);
         return;
       }
 
@@ -57,12 +57,15 @@ export class NavigationService {
     }, intervalTime);
   }
 
-  stopNavigation() {
+  stopNavigation(onEnd?: () => void) {
     if (this.demoInterval) {
       clearInterval(this.demoInterval);
       this.demoInterval = null;
     }
     Speech.speak('Navigation ended.');
+    if (onEnd) {
+      onEnd();
+    }
   }
 
   private async signalTurn(direction: 'left' | 'right') {

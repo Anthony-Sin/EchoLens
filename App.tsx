@@ -44,7 +44,7 @@ export default function App() {
       setIsDemoRunning(true);
       navigationService.startDemoNavigation(demoSpeed, (loc) => {
         setCurrentLocation(loc);
-      });
+      }, false, () => setIsDemoRunning(false));
     }
   };
 
