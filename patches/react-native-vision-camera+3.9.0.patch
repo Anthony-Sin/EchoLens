@@ -1,0 +1,25 @@
+diff --git a/node_modules/react-native-vision-camera/android/src/main/java/com/mrousavy/camera/CameraViewManager.kt b/node_modules/react-native-vision-camera/android/src/main/java/com/mrousavy/camera/CameraViewManager.kt
+index 9d67dfd..83c2f45 100644
+--- a/node_modules/react-native-vision-camera/android/src/main/java/com/mrousavy/camera/CameraViewManager.kt
++++ b/node_modules/react-native-vision-camera/android/src/main/java/com/mrousavy/camera/CameraViewManager.kt
+@@ -30,7 +30,7 @@ class CameraViewManager : ViewGroupManager<CameraView>() {
+       .put("cameraStopped", MapBuilder.of("registrationName", "onStopped"))
+       .put("cameraError", MapBuilder.of("registrationName", "onError"))
+       .put("cameraCodeScanned", MapBuilder.of("registrationName", "onCodeScanned"))
+-      .build()
++      .build().toMutableMap()
+
+   override fun getName(): String = TAG
+
+diff --git a/node_modules/react-native-vision-camera/android/src/main/java/com/mrousavy/camera/CameraViewModule.kt b/node_modules/react-native-vision-camera/android/src/main/java/com/mrousavy/camera/CameraViewModule.kt
+index 9b9d909..4d13cc5 100644
+--- a/node_modules/react-native-vision-camera/android/src/main/java/com/mrousavy/camera/CameraViewModule.kt
++++ b/node_modules/react-native-vision-camera/android/src/main/java/com/mrousavy/camera/CameraViewModule.kt
+@@ -157,7 +157,7 @@ class CameraViewModule(reactContext: ReactApplicationContext) : ReactContextBase
+   }
+
+   private fun canRequestPermission(permission: String): Boolean {
+-    val activity = currentActivity as? PermissionAwareActivity
++    val activity = reactApplicationContext.currentActivity as? PermissionAwareActivity
+     return activity?.shouldShowRequestPermissionRationale(permission) ?: false
+   }

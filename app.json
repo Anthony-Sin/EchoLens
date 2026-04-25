@@ -32,6 +32,9 @@
         {
           "android": {
             "minSdkVersion": 26,
+            "compileSdkVersion": 36,
+            "targetSdkVersion": 34,
+            "kotlinVersion": "2.1.21",
             "packagingOptions": {
               "pickFirst": [
                 "lib/x86/libc++_shared.so",
